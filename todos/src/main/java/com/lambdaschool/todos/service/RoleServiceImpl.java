@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "roleService")
-public class RoleServiceImpl implements RoleService
-{
+public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleRepository repo;
 

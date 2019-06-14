@@ -10,6 +10,7 @@ import java.util.Optional;
 @Component
 public class UserAuditing implements AuditorAware<String>
 {
+
     @Override
     public Optional<String> getCurrentAuditor()
     {
@@ -25,4 +26,5 @@ public class UserAuditing implements AuditorAware<String>
         }
         return Optional.of(uname);
     }
+
 }

@@ -9,9 +9,9 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service(value  = "todoService")
-public class TodoServiceImpl implements TodoService
-{
+@Service(value = "todoService")
+public class TodoServiceImpl implements TodoService {
+
     @Autowired
     private ToDoRepository repo;
 
@@ -59,4 +59,3 @@ public class TodoServiceImpl implements TodoService
         return currentTodo;
     }
 }
-

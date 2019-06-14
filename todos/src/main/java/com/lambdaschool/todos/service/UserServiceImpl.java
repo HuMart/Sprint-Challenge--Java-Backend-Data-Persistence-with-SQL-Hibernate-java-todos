@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserDetailsService, UserService
     private RoleRepository rolerepos;
 
     @Autowired
-    private ToDoRepository todoRepos;
+    private ToDoRepository todorepos;
 
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
@@ -55,8 +55,7 @@ public class UserServiceImpl implements UserDetailsService, UserService
     }
 
     @Override
-    public User findUserByUsername(String username)
-    {
+    public User findUserByUsername(String username) {
         return userrepos.findByUsername(username);
     }
 
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserDetailsService, UserService
     {
         if (userrepos.findById(id).isPresent())
         {
-            todoRepos.getAllByID(id);
+            todorepos.getAllByID(id);
             userrepos.deleteById(id);
         }
         else
@@ -134,5 +133,6 @@ public class UserServiceImpl implements UserDetailsService, UserService
         {
             throw new EntityNotFoundException(authentication.getName());
         }
+
     }
 }

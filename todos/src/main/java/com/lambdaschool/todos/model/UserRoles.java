@@ -8,8 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "userroles")
-public class UserRoles extends Auditable implements Serializable
-{
+public class UserRoles extends Auditable implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -26,50 +25,39 @@ public class UserRoles extends Auditable implements Serializable
     {
     }
 
-    public UserRoles(User user, Role role)
-    {
+    public UserRoles(User user, Role role) {
         this.user = user;
         this.role = role;
     }
 
-    public User getUser()
-    {
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Role getRole()
-    {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role)
-    {
+    public void setRole(Role role) {
         this.role = role;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (!(o instanceof UserRoles))
-        {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserRoles)) return false;
         UserRoles userRoles = (UserRoles) o;
-        return getUser().equals(userRoles.getUser()) && getRole().equals(userRoles.getRole());
+        return getUser().equals(userRoles.getUser()) &&
+                getRole().equals(userRoles.getRole());
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(getUser(), getRole());
     }
 }
