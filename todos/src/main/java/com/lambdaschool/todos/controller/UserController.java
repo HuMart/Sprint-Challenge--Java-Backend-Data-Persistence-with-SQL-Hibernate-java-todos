@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,7 +27,7 @@ public class UserController
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/users", produces = {"application/json"})
-    public ResponseEntity<?> listAllUsers()
+    public ResponseEntity<?> listAllUsers(HttpServletRequest request)
     {
         List<User> myUsers = userService.findAll();
         return new ResponseEntity<>(myUsers, HttpStatus.OK);
@@ -35,7 +36,8 @@ public class UserController
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/user/{userId}", produces = {"application/json"})
-    public ResponseEntity<?> getUser(@PathVariable Long userId)
+    public ResponseEntity<?> getUser(HttpServletRequest request,
+                                     @PathVariable Long userId)
     {
         User u = userService.findUserById(userId);
         return new ResponseEntity<>(u, HttpStatus.OK);
@@ -44,7 +46,8 @@ public class UserController
 
     @GetMapping(value = "/getusername", produces = {"application/json"})
     @ResponseBody
-    public ResponseEntity<?> getCurrentUserName(Authentication authentication)
+    public ResponseEntity<?> getCurrentUserName(HttpServletRequest request,
+                                                Authentication authentication)
     {
         return new ResponseEntity<>(authentication.getPrincipal(), HttpStatus.OK);
     }
@@ -52,7 +55,8 @@ public class UserController
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<?> addNewUser(@Valid
+    public ResponseEntity<?> addNewUser(HttpServletRequest request,
+                                        @Valid
                                         @RequestBody User newuser) throws URISyntaxException
     {
         newuser =  userService.save(newuser);
@@ -70,8 +74,10 @@ public class UserController
 
 
     @PutMapping(value = "/user/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody
-                                                User updateUser, @PathVariable long id)
+    public ResponseEntity<?> updateUser(HttpServletRequest request,
+                                        @RequestBody
+                                                User updateUser,
+                                        @PathVariable long id)
     {
         userService.update(updateUser, id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -80,7 +86,8 @@ public class UserController
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable
+    public ResponseEntity<?> deleteUserById(HttpServletRequest request,
+                                            @PathVariable
                                                     long id)
     {
         userService.delete(id);

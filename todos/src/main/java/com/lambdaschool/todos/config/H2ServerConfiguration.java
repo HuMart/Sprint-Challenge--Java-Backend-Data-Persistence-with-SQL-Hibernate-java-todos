@@ -11,7 +11,8 @@ import java.sql.SQLException;
 @Configuration
 // taken from https://techdev.io/en/developer-blog/querying-the-embedded-h2-database-of-a-spring-boot-application
 // necessary for using the database tool built into intellij
-public class H2ServerConfiguration {
+public class H2ServerConfiguration
+{
 
     // TCP port for remote connections, default 9092
     @Value("${h2.tcp.port:9092}")
